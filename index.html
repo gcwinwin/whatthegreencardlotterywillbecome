@@ -7,60 +7,101 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow-x: hidden; width: 100%; }
 body { font-family: 'Source Sans 3', sans-serif; background: #002868; color: white; min-height: 100vh; }
-.gov-banner { background: #f0f0f0; color: #1a1a1a; font-size: 12px; padding: 4px 16px; display: flex; align-items: center; gap: 6px; }
+
+.gov-banner { background: #f0f0f0; color: #1a1a1a; font-size: 11px; padding: 4px 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .gov-banner a { color: #005ea2; text-decoration: underline; cursor: pointer; }
-.header { background: #002868; border-bottom: 4px solid #BF0A30; padding: 12px 24px; display: flex; align-items: center; gap: 16px; }
-.seal { width: 56px; height: 56px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
-.header-text h1 { font-family: 'Libre Baskerville', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.2; }
-.header-text p { font-size: 11px; color: #a8c4e0; letter-spacing: 0.05em; text-transform: uppercase; }
-.nav { background: #1a3a6e; display: flex; gap: 0; padding: 0 24px; border-bottom: 1px solid #2a4a7e; overflow-x: auto; }
-.nav a { color: #ccd9f0; font-size: 13px; padding: 10px 14px; text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+.header { background: #002868; border-bottom: 4px solid #BF0A30; padding: 10px 10px; display: flex; align-items: center; gap: 10px; }
+.header-text { min-width: 0; }
+.header-text h1 { font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; line-height: 1.2; }
+.header-text p { font-size: 9px; color: #a8c4e0; letter-spacing: 0.04em; text-transform: uppercase; }
+.seal { width: 40px; height: 40px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.nav { background: #1a3a6e; display: flex; padding: 0 6px; border-bottom: 1px solid #2a4a7e; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.nav a { color: #ccd9f0; font-size: 12px; padding: 8px 8px; text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
 .nav a.active { color: white; border-bottom: 3px solid #BF0A30; }
-.notice-bar { background: #BF0A30; text-align: center; padding: 8px 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.03em; }
-.main { max-width: 860px; margin: 0 auto; padding: 24px 16px; display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
-@media (max-width: 640px) { .main { grid-template-columns: 1fr; } }
+.notice-bar { background: #BF0A30; text-align: center; padding: 6px 10px; font-size: 11px; font-weight: 600; word-wrap: break-word; }
+.intro-section { max-width: 860px; margin: 0 auto; padding: 12px 10px 0; color: white; }
+.intro-section h2 { font-size: 18px; }
+.main { max-width: 860px; margin: 0 auto; padding: 12px 10px; display: flex; flex-direction: column; gap: 14px; }
 .content-card { background: white; color: #1a1a1a; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
-.card-header { background: #002868; color: white; padding: 10px 16px; font-family: 'Libre Baskerville', serif; font-size: 15px; font-weight: 700; border-left: 4px solid #BF0A30; }
-.card-body { padding: 16px; }
-.step-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.step-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.4; }
-.step-num { background: #002868; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-.fee-badge { display: inline-block; background: #BF0A30; color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 2px; margin-left: 6px; vertical-align: middle; }
-.wheel-container { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 0; }
-#wheelCanvas { border-radius: 50%; box-shadow: 0 0 0 4px #002868, 0 0 0 6px #BF0A30, 0 4px 20px rgba(0,0,0,0.4); cursor: pointer; }
-.spin-btn { background: #BF0A30; color: white; border: none; padding: 12px 32px; font-size: 15px; font-weight: 700; border-radius: 3px; cursor: pointer; letter-spacing: 0.05em; text-transform: uppercase; font-family: 'Source Sans 3', sans-serif; transition: background 0.2s, transform 0.1s; width: 100%; max-width: 260px; }
+.card-header { background: #002868; color: white; padding: 8px 10px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; border-left: 4px solid #BF0A30; }
+.card-body { padding: 10px; overflow: hidden; }
+.step-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.step-list li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.5; }
+.step-list li > div:last-child { min-width: 0; }
+.step-num { background: #002868; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.fee-badge { display: inline-block; background: #BF0A30; color: white; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
+
+.wheel-container { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 8px 0; }
+.wheel-canvas-wrap { width: 220px; max-width: 100%; }
+#wheelCanvas { display: block; width: 100%; height: auto; border-radius: 50%; box-shadow: 0 0 0 3px #002868, 0 0 0 5px #BF0A30, 0 4px 16px rgba(0,0,0,0.4); cursor: pointer; }
+.pointer { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 18px solid #BF0A30; margin: 0 auto; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
+.spin-btn { background: #BF0A30; color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: 700; border-radius: 3px; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; font-family: 'Source Sans 3', sans-serif; width: 100%; max-width: 240px; }
 .spin-btn:hover:not(:disabled) { background: #9a0825; }
 .spin-btn:active:not(:disabled) { transform: scale(0.98); }
 .spin-btn:disabled { background: #888; cursor: not-allowed; }
 .odds-note { font-size: 11px; color: #555; text-align: center; line-height: 1.4; }
-.result-box { border-radius: 4px; padding: 14px 16px; text-align: center; font-size: 14px; font-weight: 600; display: none; line-height: 1.4; }
+.spin-counter { font-size: 11px; color: #777; text-align: center; margin-top: 4px; }
+.result-box { border-radius: 4px; padding: 10px; text-align: center; font-size: 13px; font-weight: 600; display: none; line-height: 1.4; }
 .result-box.win { background: #e6f4ea; border: 2px solid #1e7e34; color: #155724; display: block; }
 .result-box.lose { background: #fff3f3; border: 2px solid #c0392b; color: #7b1c1c; display: block; }
-.result-box .result-icon { font-size: 28px; margin-bottom: 6px; }
-.result-box .result-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-.result-box .result-sub { font-size: 12px; font-weight: 400; line-height: 1.5; }
-.upload-section { border: 2px dashed #b0b8cc; border-radius: 4px; padding: 14px; text-align: center; cursor: pointer; margin-bottom: 12px; transition: border-color 0.2s, background 0.2s; background: #f8f9fc; }
-.upload-section:hover { border-color: #002868; background: #eef2f8; }
-.upload-section .upload-icon { font-size: 28px; margin-bottom: 4px; }
-.upload-section .upload-label { font-size: 13px; color: #444; font-weight: 600; }
-.upload-section .upload-sub { font-size: 11px; color: #888; }
-.passport-uploaded { background: #eef8ef; border: 1px solid #5cb85c; border-radius: 3px; padding: 8px 12px; font-size: 12px; color: #2e6b2e; display: none; align-items: center; gap: 8px; margin-bottom: 12px; }
-.payment-row { display: flex; align-items: center; justify-content: space-between; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 10px 14px; margin-bottom: 12px; font-size: 13px; }
-.payment-row .amount { font-size: 20px; font-weight: 700; color: #002868; }
-.pay-btn { background: #002868; color: white; border: none; padding: 8px 18px; font-size: 13px; font-weight: 600; border-radius: 3px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; transition: background 0.2s; }
+.result-box .result-icon { font-size: 24px; margin-bottom: 4px; }
+.result-box .result-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.result-box .result-sub { font-size: 11px; font-weight: 400; line-height: 1.5; }
+
+.upload-section { border: 2px dashed #b0b8cc; border-radius: 4px; padding: 12px; text-align: center; cursor: pointer; margin-bottom: 10px; background: #f8f9fc; }
+.upload-section:hover { border-color: #002868; }
+.upload-section .upload-icon { font-size: 22px; }
+.upload-section .upload-label { font-size: 12px; color: #444; font-weight: 600; }
+.upload-section .upload-sub { font-size: 10px; color: #888; }
+.passport-uploaded { background: #eef8ef; border: 1px solid #5cb85c; border-radius: 3px; padding: 6px 8px; font-size: 11px; color: #2e6b2e; display: none; align-items: center; gap: 6px; margin-bottom: 10px; }
+.payment-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 8px 10px; margin-bottom: 10px; font-size: 12px; }
+.payment-row .amount { font-size: 18px; font-weight: 700; color: #002868; }
+.pay-btn { background: #002868; color: white; border: none; padding: 7px 14px; font-size: 12px; font-weight: 600; border-radius: 3px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; white-space: nowrap; }
 .pay-btn:hover { background: #001840; }
 .pay-btn.paid { background: #5cb85c; cursor: default; }
-.disclaimer { background: #fff9e6; border-left: 3px solid #f0ad4e; padding: 8px 12px; font-size: 11px; color: #7a5f00; line-height: 1.5; margin-top: 16px; }
-.sidebar-card-body .stat-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid #f0f0f0; align-items: center; }
+.disclaimer { background: #fff9e6; border-left: 3px solid #f0ad4e; padding: 6px 8px; font-size: 10px; color: #7a5f00; line-height: 1.5; margin-top: 10px; }
+
+.sidebar-card-body .stat-row { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid #f0f0f0; }
 .stat-row .stat-val { font-weight: 700; color: #002868; }
 .stat-row .stat-val.highlight { color: #BF0A30; }
-.winner-ticker { background: #002868; color: white; font-size: 11px; padding: 6px 12px; border-top: 2px solid #BF0A30; overflow: hidden; white-space: nowrap; }
+.winner-ticker { background: #002868; color: white; font-size: 10px; padding: 5px 8px; border-top: 2px solid #BF0A30; overflow: hidden; white-space: nowrap; }
 .ticker-inner { display: inline-block; animation: tickerScroll 20s linear infinite; }
-@keyframes tickerScroll { 0% { transform: translateX(300px); } 100% { transform: translateX(-100%); } }
-.pointer { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 22px solid #BF0A30; margin: 0 auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-.spin-counter { font-size: 11px; color: #777; text-align: center; margin-top: 4px; }
+@keyframes tickerScroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+/* — Gold card — */
+.gold-card-wrap { max-width: 860px; margin: 0 auto; padding: 0 10px 16px; }
+.gold-card-grid { display: grid; grid-template-columns: 1fr; }
+.gold-card-panel { padding: 14px; }
+
+/* — Footer — */
+.page-footer { background: #001840; color: #7090b0; font-size: 10px; text-align: center; padding: 12px 10px; border-top: 2px solid #BF0A30; word-wrap: break-word; }
+
+/* — Desktop upgrades — */
+@media (min-width: 641px) {
+  .gov-banner { font-size: 12px; padding: 4px 16px; }
+  .header { padding: 12px 24px; gap: 16px; }
+  .seal { width: 56px; height: 56px; font-size: 28px; }
+  .header-text h1 { font-size: 17px; }
+  .header-text p { font-size: 11px; }
+  .nav { padding: 0 24px; }
+  .nav a { font-size: 13px; padding: 10px 14px; }
+  .notice-bar { font-size: 13px; padding: 8px 16px; }
+  .main { padding: 24px 16px; display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+  .card-header { font-size: 15px; padding: 10px 16px; }
+  .card-body { padding: 16px; }
+  .step-list li { font-size: 14px; }
+  .wheel-canvas-wrap { width: 260px; }
+  .gold-card-wrap { padding: 0 16px 24px; }
+  .gold-card-grid { grid-template-columns: 1fr 1fr; }
+  .gold-card-panel:first-child { border-right: 1px solid #C9A84C33; }
+  .gold-card-panel { padding: 20px; }
+  .page-footer { font-size: 11px; padding: 16px; }
+  .intro-section { padding: 16px 16px 0; }
+  .intro-section h2 { font-size: 22px; }
+}
 </style>
 </head>
 <body>
@@ -93,9 +134,9 @@ body { font-family: 'Source Sans 3', sans-serif; background: #002868; color: whi
   ⚠ DV-2026 REGISTRATION NOW OPEN · Fees Start at $1 and Go Up From There · Spin Responsibly
 </div>
 
-<div style="max-width: 860px; margin: 0 auto; padding: 16px 16px 0; color: white;">
+<div class="intro-section">
   <div style="font-size: 12px; color: #a8c4e0;">Home › Diversity Visa Program › Apply &amp; Spin</div>
-  <h2 style="font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 700; margin: 8px 0 4px;">
+  <h2 style="font-family: 'Libre Baskerville', serif; font-weight: 700; margin: 8px 0 4px;">
     Diversity Visa Lottery — Interactive Application Portal
   </h2>
   <p style="font-size: 13px; color: #a8c4e0; margin-bottom: 16px;">
@@ -104,7 +145,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: #002868; color: whi
 </div>
 
 <div class="main">
-  <div style="display: flex; flex-direction: column; gap: 16px;">
+  <div style="display: flex; flex-direction: column; gap: 14px; min-width: 0;">
 
     <div class="content-card">
       <div class="card-header">Step-by-Step Application Instructions</div>
@@ -161,14 +202,16 @@ body { font-family: 'Source Sans 3', sans-serif; background: #002868; color: whi
     </div>
   </div>
 
-  <div style="display: flex; flex-direction: column; gap: 16px;">
+  <div style="display: flex; flex-direction: column; gap: 14px; min-width: 0;">
 
     <div class="content-card">
       <div class="card-header">🎡 Spin the Wheel of Opportunity™</div>
       <div class="card-body">
         <div class="wheel-container">
           <div class="pointer"></div>
-          <canvas id="wheelCanvas" width="260" height="260"></canvas>
+          <div class="wheel-canvas-wrap">
+            <canvas id="wheelCanvas" width="260" height="260"></canvas>
+          </div>
           <button class="spin-btn" id="spinBtn" onclick="spinWheel()" disabled>
             🇺🇸 &nbsp;Spin for Freedom
           </button>
@@ -210,64 +253,64 @@ body { font-family: 'Source Sans 3', sans-serif; background: #002868; color: whi
   </div>
 </div>
 
-<div style="max-width: 860px; margin: 0 auto; padding: 0 16px 24px;">
+<div class="gold-card-wrap">
   <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #C9A84C; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-    <div style="background: linear-gradient(90deg, #C9A84C, #f5d98b, #C9A84C); padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;">
-      <div style="font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; color: #1a1a1a; letter-spacing: 0.05em;">✦ PREMIUM IMMIGRATION PRODUCTS ✦</div>
-      <div style="font-size: 10px; color: #1a1a1a; font-weight: 600; letter-spacing: 0.08em;">SPONSORED · PAID ADVERTISEMENT</div>
+    <div class="gold-card-ad-header" style="background: linear-gradient(90deg, #C9A84C, #f5d98b, #C9A84C); padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
+      <div style="font-family: 'Libre Baskerville', serif; font-size: 12px; font-weight: 700; color: #1a1a1a;">✦ PREMIUM IMMIGRATION PRODUCTS ✦</div>
+      <div style="font-size: 9px; color: #1a1a1a; font-weight: 600;">SPONSORED</div>
     </div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
+    <div class="gold-card-grid">
 
       <!-- Gold Card -->
-      <div style="padding: 20px; border-right: 1px solid #C9A84C33;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-          <div style="width: 54px; height: 34px; background: linear-gradient(135deg, #B8860B, #FFD700, #B8860B); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 8px rgba(201,168,76,0.4);">🦅</div>
-          <div>
-            <div style="font-family: 'Libre Baskerville', serif; color: #FFD700; font-size: 15px; font-weight: 700; line-height: 1;">TRUMP GOLD CARD™</div>
-            <div style="color: #C9A84C; font-size: 10px; letter-spacing: 0.1em;">PERMANENT RESIDENCY · PRESTIGE EDITION</div>
+      <div class="gold-card-panel">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+          <div style="width: 44px; height: 28px; background: linear-gradient(135deg, #B8860B, #FFD700, #B8860B); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">🦅</div>
+          <div style="min-width: 0;">
+            <div style="font-family: 'Libre Baskerville', serif; color: #FFD700; font-size: 14px; font-weight: 700; line-height: 1;">TRUMP GOLD CARD™</div>
+            <div style="color: #C9A84C; font-size: 9px; letter-spacing: 0.08em;">PERMANENT RESIDENCY · PRESTIGE EDITION</div>
           </div>
         </div>
-        <div style="color: #e0d0a0; font-size: 12px; line-height: 1.6; margin-bottom: 12px;">
+        <div style="color: #e0d0a0; font-size: 12px; line-height: 1.6; margin-bottom: 10px;">
           Skip the line. Skip the lottery. Skip the waiting.<br>
           Just wire us <strong style="color: #FFD700;">$1,000,000</strong> and you're basically American.<br>
-          <em style="font-size: 11px; color: #9a8860;">Terms apply. Being American not guaranteed. Card is gold-colored, not actual gold. Probably.</em>
+          <em style="font-size: 10px; color: #9a8860;">Terms apply. Being American not guaranteed. Card is gold-colored, not actual gold. Probably.</em>
         </div>
-        <div style="background: rgba(201,168,76,0.1); border: 1px solid #C9A84C44; border-radius: 3px; padding: 8px 10px; font-size: 11px; color: #C9A84C; margin-bottom: 12px;">
+        <div style="background: rgba(201,168,76,0.1); border: 1px solid #C9A84C44; border-radius: 3px; padding: 6px 8px; font-size: 10px; color: #C9A84C; margin-bottom: 10px;">
           <strong>Approvals to date:</strong> 1<br>
-          <span style="color: #9a8860; font-size: 10px;">Odds roughly equivalent to this wheel, but costs $999,999 more. Winning!</span>
+          <span style="color: #9a8860; font-size: 9px;">Odds roughly equivalent to this wheel, but costs $999,999 more. Winning!</span>
         </div>
-        <a href="https://apnews.com/article/trump-gold-card-visa-immigration-approvals-revenue-f05fe42f2f90708f2146613b82e072e9" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #B8860B, #FFD700); color: #1a1a1a; font-size: 12px; font-weight: 700; padding: 7px 16px; border-radius: 3px; text-decoration: none; letter-spacing: 0.03em;">Apply Now — $1M</a>
+        <a href="https://apnews.com/article/trump-gold-card-visa-immigration-approvals-revenue-f05fe42f2f90708f2146613b82e072e9" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #B8860B, #FFD700); color: #1a1a1a; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 3px; text-decoration: none;">Apply Now — $1M</a>
       </div>
 
       <!-- Platinum Card -->
-      <div style="padding: 20px;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-          <div style="width: 54px; height: 34px; background: linear-gradient(135deg, #8a8a9a, #d0d0e0, #8a8a9a); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 8px rgba(200,200,220,0.4);">🦅</div>
-          <div>
-            <div style="font-family: 'Libre Baskerville', serif; color: #d0d0e0; font-size: 15px; font-weight: 700; line-height: 1;">TRUMP PLATINUM CARD™</div>
-            <div style="color: #a0a0c0; font-size: 10px; letter-spacing: 0.1em;">ULTRA PREMIUM · COMING SOON™</div>
+      <div class="gold-card-panel">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+          <div style="width: 44px; height: 28px; background: linear-gradient(135deg, #8a8a9a, #d0d0e0, #8a8a9a); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">🦅</div>
+          <div style="min-width: 0;">
+            <div style="font-family: 'Libre Baskerville', serif; color: #d0d0e0; font-size: 14px; font-weight: 700; line-height: 1;">TRUMP PLATINUM CARD™</div>
+            <div style="color: #a0a0c0; font-size: 9px; letter-spacing: 0.08em;">ULTRA PREMIUM · COMING SOON™</div>
           </div>
         </div>
-        <div style="color: #c0c0d8; font-size: 12px; line-height: 1.6; margin-bottom: 12px;">
+        <div style="color: #c0c0d8; font-size: 11px; line-height: 1.6; margin-bottom: 10px;">
           More exclusive than Gold. Less approved than Gold.<br>
           Platinum is the card for people who found $1M too affordable.<br>
-          <em style="font-size: 11px; color: #7a7a9a;">Price TBD. Probably more. A lot more. The best more.</em>
+          <em style="font-size: 10px; color: #7a7a9a;">Price TBD. Probably more. A lot more. The best more.</em>
         </div>
-        <div style="background: rgba(200,200,220,0.08); border: 1px solid #a0a0c044; border-radius: 3px; padding: 8px 10px; font-size: 11px; color: #a0a0c0; margin-bottom: 12px;">
+        <div style="background: rgba(200,200,220,0.08); border: 1px solid #a0a0c044; border-radius: 3px; padding: 6px 8px; font-size: 10px; color: #a0a0c0; margin-bottom: 10px;">
           <strong>Approvals to date:</strong> 0<br>
-          <span style="color: #6a6a8a; font-size: 10px;">Odds: statistically indistinguishable from being struck by lightning while winning the regular lottery. On a Tuesday.</span>
+          <span style="color: #6a6a8a; font-size: 9px;">Odds: statistically indistinguishable from being struck by lightning while winning the regular lottery. On a Tuesday.</span>
         </div>
-        <span style="display: inline-block; background: #3a3a4a; color: #6a6a8a; font-size: 12px; font-weight: 700; padding: 7px 16px; border-radius: 3px; letter-spacing: 0.03em; cursor: not-allowed;">Waitlist Full (0 spots)</span>
+        <span style="display: inline-block; background: #3a3a4a; color: #6a6a8a; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 3px; cursor: not-allowed;">Waitlist Full (0 spots)</span>
       </div>
 
     </div>
-    <div style="background: rgba(201,168,76,0.06); border-top: 1px solid #C9A84C33; padding: 8px 16px; font-size: 10px; color: #6a6040; text-align: center; line-height: 1.5;">
+    <div class="gold-card-disclaimer" style="background: rgba(201,168,76,0.06); border-top: 1px solid #C9A84C33; padding: 6px 10px; font-size: 9px; color: #6a6040; text-align: center; line-height: 1.5;">
       Trump Gold Card™ and Trump Platinum Card™ are parody products. The real Trump Gold Card has received exactly 1 approval as of reporting. Source: AP News. This advertisement paid for by the Committee to Make Immigration Confusing Again.
     </div>
   </div>
 </div>
 
-<div style="background: #001840; color: #7090b0; font-size: 11px; text-align: center; padding: 16px; margin-top: 24px; border-top: 2px solid #BF0A30;">
+<div class="page-footer">
   U.S. Department of State (Parody) · Bureau of Consular Affairs (Satirical Division) · Not a real government website · For entertainment purposes only<br>
   The real DV Lottery: <span style="color: #6aabdd;">dvlottery.state.gov</span> · This page is a joke. Please do not send us $1. Or do. We're not the government.
 </div>
@@ -459,6 +502,7 @@ function spinWheel() {
 
   totalSpins++;
   sessionFees += currentPrice() > 1 ? currentPrice() : 1;
+  paid = false;
   updatePaymentUI();
 
   // Pick a random target segment (pure random — result determined by where wheel lands)
@@ -514,7 +558,6 @@ function spinWheel() {
         result.innerHTML = '<div class="result-icon">🚫</div><div class="result-title">NOT SELECTED</div><div class="result-sub">' + msg + '</div>';
       }
 
-      paid = false;
       const btn = document.getElementById('payBtn');
       btn.classList.remove('paid');
       updatePaymentUI();
